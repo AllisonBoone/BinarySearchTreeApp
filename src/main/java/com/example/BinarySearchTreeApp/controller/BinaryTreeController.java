@@ -15,18 +15,27 @@ public class BinaryTreeController {
 
     // Store numbers with error handling. 
     @PostMapping("/process-numbers")
-    @ResponseBody
-    public TreeRecord processNumbers(@RequestParam String input) {
+    public String processNumbers(@RequestParam String input, org.springframework.ui.Model model) {
         try {
-            return binaryTreeService.buildAndSaveTree(input);
+            TreeRecord record = binaryTreeService.buildAndSaveTree(input);
+            model.addAttribute("tree", record);
+            return "result"; // loads result.html
         } catch (Exception e) {
             throw new RuntimeException("Failed to process input: " + e.getMessage());
         }
     }
 
-    // Loads HTML form.
+    // Loads HTML page.
     @GetMapping("/enter-numbers")
     public String enterNumbersPage() {
         return "enter-numbers";
     }
+
+    // Loads previous trees page.
+    @GetMapping("/previous-trees")
+    public String showPreviousTrees(org.springframework.ui.Model model) {
+        model.addAttribute("trees", binaryTreeService.getAllTrees());
+        return "previous-trees";
+}
+
 }

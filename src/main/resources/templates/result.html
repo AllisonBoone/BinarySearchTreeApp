@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tree Result</title>
+  </head>
+  <body>
+    <h1>Binary Search Tree Created</h1>
+
+    <p>
+      <strong>Input Numbers:</strong>
+      <span th:text="${tree.inputNumbers}"></span>
+    </p>
+    <p><strong>Tree (JSON):</strong></p>
+    <pre th:text="${tree.treeJson}"></pre>
+
+    <br />
+    <a href="/enter-numbers"><button>Back to Form</button></a>
+  </body>
+</html>

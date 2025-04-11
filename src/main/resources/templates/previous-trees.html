@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Previous Trees</title>
+  </head>
+  <body>
+    <h1>Stored Trees</h1>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Input Numbers</th>
+        <th>Tree (JSON)</th>
+      </tr>
+      <th:block th:each="tree : ${trees}">
+        <tr>
+          <td th:text="${tree.id}"></td>
+          <td th:text="${tree.inputNumbers}"></td>
+          <td><pre th:text="${tree.treeJson}"></pre></td>
+        </tr>
+      </th:block>
+    </table>
+
+    <br />
+    <a href="/enter-numbers">Back to Form</a>
+  </body>
+</html>

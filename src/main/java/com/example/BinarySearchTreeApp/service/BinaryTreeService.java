@@ -34,4 +34,9 @@ public class BinaryTreeService {
         TreeRecord record = new TreeRecord(input, treeJson);
         return treeRecordRepository.save(record);
     }
+
+        // Gets all previous trees.
+        public List<TreeRecord> getAllTrees() {
+            return treeRecordRepository.findAll();
+        }
 }
