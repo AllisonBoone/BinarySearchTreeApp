@@ -19,11 +19,12 @@ public class BinaryTreeController {
         try {
             TreeRecord record = binaryTreeService.buildAndSaveTree(input);
             model.addAttribute("tree", record);
-            return "result"; // loads result.html
+            return "result";
         } catch (Exception e) {
-            throw new RuntimeException("Failed to process input: " + e.getMessage());
+            e.printStackTrace(); // 🔍 Log full stack trace
+            throw new RuntimeException("Failed to process input: " + (e.getMessage() != null ? e.getMessage() : "Unknown error"));
         }
-    }
+    }    
 
     // Loads HTML page.
     @GetMapping("/enter-numbers")
@@ -36,6 +37,6 @@ public class BinaryTreeController {
     public String showPreviousTrees(org.springframework.ui.Model model) {
         model.addAttribute("trees", binaryTreeService.getAllTrees());
         return "previous-trees";
-}
+    }
 
 }

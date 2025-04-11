@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BinaryTreeService {
@@ -17,16 +18,16 @@ public class BinaryTreeService {
     private final ObjectMapper mapper = new ObjectMapper();
 
     public TreeRecord buildAndSaveTree(String input) throws Exception {
-        // Parses the numbers.
-        String[] parts = input.split(",");
+        // Parses and sorts the numbers.
+        List<Integer> numberList = Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
         BinarySearchTree bst = new BinarySearchTree();
+        bst.buildBalancedTreeFromList(numberList);
 
-        for (String part : parts) {
-            int num = Integer.parseInt(part.trim());
-            bst.insert(num);
-        }
-
-        // Converts tree to JSON string.
+        // Converts tree to JSON.
         Map<String, Object> treeMap = bst.toMap(bst.getRoot());
         String treeJson = mapper.writeValueAsString(treeMap);
 
@@ -35,8 +36,9 @@ public class BinaryTreeService {
         return treeRecordRepository.save(record);
     }
 
-        // Gets all previous trees.
-        public List<TreeRecord> getAllTrees() {
-            return treeRecordRepository.findAll();
-        }
+    // Gets all previous trees.
+    public List<TreeRecord> getAllTrees() {
+        return treeRecordRepository.findAll();
+    }
 }
+

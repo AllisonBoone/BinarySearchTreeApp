@@ -39,4 +39,22 @@ public class BinarySearchTree {
 
         return map;
     }
+
+    // Creates balanced tree.
+    public void buildBalancedTreeFromList(List<Integer> numbers) {
+        Collections.sort(numbers);
+        root = buildBalancedRecursive(numbers, 0, numbers.size() - 1);
+    }
+
+    private TreeNode buildBalancedRecursive(List<Integer> nums, int start, int end) {
+        if (start > end) return null;
+
+        int mid = (start + end) / 2;
+        TreeNode node = new TreeNode(nums.get(mid));
+
+        node.setLeft(buildBalancedRecursive(nums, start, mid - 1));
+        node.setRight(buildBalancedRecursive(nums, mid + 1, end));
+
+        return node;
+    }
 }
