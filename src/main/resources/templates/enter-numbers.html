@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Enter Numbers</title>
+  </head>
+  <body>
+    <h1>Binary Search Tree Builder</h1>
+
+    <form action="/process-numbers" method="post">
+      <label for="input">Enter numbers (separate with comma):</label><br />
+      <input type="text" name="input" id="input" required />
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <br />
+
+    <form action="/previous-trees" method="get">
+      <button type="submit">Show Previous Trees</button>
+    </form>
+  </body>
+</html>
